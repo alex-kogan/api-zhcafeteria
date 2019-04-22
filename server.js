@@ -24,6 +24,7 @@ mdb.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const User = require('./Database/Users.js')
 const Password = require('./Database/Passwords.js')
+const Transaction = require('./Database/Transactions.js')
 
 
 const register = require('./Controllers/register')

@@ -33,11 +33,22 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', function(next) {
   const doc = this;
   const email = this.email
-  const firstName =captilizeName(email.substring(0,email.indexOf('.')))
-  const lastName = captilizeName(email.substring(firstName.length+1,email.indexOf('@')))
+  const numberDots = (email.match(/\./g) || []).length;
+  let firstName = ''
+  let lastName = ''
+  let fullName = ''
+  if (numberDots===2) {
+    firstName =captilizeName(email.substring(0,email.indexOf('.')))
+    lastName = captilizeName(email.substring(firstName.length+1,email.indexOf('@')))
+    fullName = lastName+', '+firstName
+  }
+  else {
+    firstName = captilizeName(email.substring(0,email.indexOf('@')))
+    fullName = firstName
+  }
   doc.firstName = firstName
   doc.lastName = lastName
-  doc.fullName = lastName+', '+firstName
+  doc.fullName = fullName
   next()
 });
 

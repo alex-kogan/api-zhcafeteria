@@ -46,7 +46,7 @@ server.post('/signin', (req, res) => signin.handleSignin(req, res, mdb, bcrypt))
 server.post('/register', (req, res) => register.handleRegister(req, res, mdb, bcrypt))
 server.get('/profile/:id', (req, res) => profile.handleProfile(req, res, mdb))
 server.put('/transaction/:id', (req, res) => transaction.handleTransaction(req, res, mdb))
-server.post('/adminGetUsers', (req, res) => admin.handleAdminUserList(req, res, mdb))
+server.post('/admin', (req, res) => admin.handleAdminActions(req, res, mdb))
 
 server.listen(process.env.PORT || 3000, () => {
 	if (process.env.PORT)

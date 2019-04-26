@@ -2,7 +2,7 @@ const roundedNumber = (number) => {
 	return Math.round(number * 100) / 100	
 }
 
-const errorMsg = 'The transaction resultend in an error if this presists please contact admin '
+const errorMsg = 'The transaction resulted in an error if this presists please contact admin, error details: '
 
 const handleTransaction = (req, res, db) => {
 	const {id} = req.params;

@@ -16,7 +16,7 @@ const handleRegister =  (req, res, db, bcrypt) => {
 				if (error.code === 11000 || error.code === 11001) {
 					res.status(400).json('Email already exists in the database')	
 				}
-				else {res.status(400).json('Error creating a user, please try again if problem presists please reach to system admin:'+error)}
+				else {res.status(400).json('Error creating a user, please try again if problem presists please reach to system admin: '+error)}
 			}
 			// if there's no error continue and save a user
 			else {
@@ -29,7 +29,7 @@ const handleRegister =  (req, res, db, bcrypt) => {
 				user.save((error, data) => {
 					if (error) {
 						// if there was an error saving a new user remove the instance from the password collection
-						Password.findOneAndRemove({email: email},()=>{res.status(400).json('Error creating a user, please try again if problem presists please reach to system admin:'+error)})
+						Password.findOneAndRemove({email: email},()=>{res.status(400).json('Error creating a user, please try again if problem presists please reach to system admin: '+error)})
 					} 
 					else {
 						// if user created succesfuly respond all the user's data

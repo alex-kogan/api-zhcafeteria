@@ -13,9 +13,13 @@ const transactionSchema = new mongoose.Schema({
     required: true
   },
   transactionDate: {
-  	type: Date,
+  	type: String,
   	required: true
-  }  
+  },
+  transactionTime: {
+    type: String,
+    required: true
+  }
 });
 
 module.exports = mongoose.model('Transaction', transactionSchema)

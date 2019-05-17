@@ -32,6 +32,8 @@ const signin = require('./Controllers/signin')
 const transaction = require('./Controllers/transaction')
 const profile = require('./Controllers/profile')
 const admin = require('./Controllers/admin')
+const stats = require('./Controllers/stats')
+
 
 const server = express();
 
@@ -46,6 +48,7 @@ server.post('/signin', (req, res) => signin.handleSignin(req, res, mdb, bcrypt))
 server.post('/register', (req, res) => register.handleRegister(req, res, mdb, bcrypt))
 server.get('/profile/:id', (req, res) => profile.handleProfile(req, res, mdb))
 server.put('/transaction/:id', (req, res) => transaction.handleTransaction(req, res, mdb))
+server.get('/stats/:id', (req, res) => stats.handleStats(req, res, mdb))
 server.post('/admin', (req, res) => admin.handleAdminActions(req, res, mdb))
 
 server.listen(process.env.PORT || 3000, () => {

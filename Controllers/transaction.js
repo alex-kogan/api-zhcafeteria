@@ -4,6 +4,10 @@ const roundedNumber = (number) => {
 
 const errorMsg = 'The transaction resulted in an error if this presists please contact admin, error details: '
 
+const addZero = (number) => {
+	return number < 10 ? ('0' + number.toString()): number.toString()
+}
+
 const handleTransaction = (req, res, db) => {
 	const {id} = req.params;
 	const {amount} = req.body
@@ -13,10 +17,12 @@ const handleTransaction = (req, res, db) => {
 		// found the user we can insert the transaction
 		else {
 			// first create a new transaction
+			const date = new Date()
 			const transaction = new Transaction ({
 				userID: id,
 				transactionAmount: amount,
-				transactionDate: Date.now()
+				transactionDate: date.getFullYear()+'-'+addZero(date.getMonth()+1)+'-'+addZero(date.getDate()),
+				transactionTime: addZero(date.getHours()) + ':' + addZero(date.getMinutes())
 			})
 			// save the transaction
 			transaction.save((error, data) => {

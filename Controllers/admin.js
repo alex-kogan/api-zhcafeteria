@@ -6,6 +6,10 @@ const getUserList = (res, db) => {
 	})
 }
 
+const addZero = (number) => {
+	return number < 10 ? ('0' + number.toString()): number.toString()
+}
+
 const resetCurrentValues = (req, res, db) => {
 	const errorMsg = 'The reset resulted in an error if this presists please contact admin, error details :'
 	const {usersToReset} = req.body
@@ -15,13 +19,14 @@ const resetCurrentValues = (req, res, db) => {
 		// found the users we can insert the transaction
 		else {
 			// first create new transactions
-			const newResetDate = Date.now()
+			const newResetDate = new Date()
 			const resetTransactions = []
 			users.map((user) => {
 				resetTransactions.push(new Transaction ({
 					userID: user._id,
 					transactionAmount: -user.currentValue,
-					transactionDate: newResetDate
+					transactionDate: newResetDate.getFullYear()+'-'+addZero(newResetDate.getMonth()+1)+'-'+addZero(newResetDate.getDate()),
+					transactionTime: addZero(newResetDate.getHours()) + ':' + addZero(newResetDate.getMinutes())
 				}))
 			})
 			Transaction.insertMany(resetTransactions, (error, newTransactionsIds) => {
